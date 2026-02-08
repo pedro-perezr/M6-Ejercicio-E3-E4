@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+
+    {{> header}}
+
+    <h3>Bienvenido {{user.name}}</h3>
+
+    {{#if user.isAdmin}}
+    <p>modo admin activo</p>
+    {{/if}}
+
+    {{#each projects}}
+
+    <div class="card">
+
+      <b>{{this.name}}</b>
+
+        {{#if this.isCompleted}}
+            (listo)
+              {{else}}
+                  (en progreso)
+                    {{/if}}
+
+                      {{#if this.tasks.length}}
+                        <ul>
+                            {{#each this.tasks}}
+                                  <li class="{{priorityClass this.priority}}">
+                                          {{this.description}}
+                                                </li>
+                                                    {{/each}}
+                                                      </ul>
+                                                        {{else}}
+                                                            <p>sin tareas</p>
+                                                              {{/if}}
+
+                                                              </div>
+
+                                                              {{/each}}
+
+                                                              {{> footer}}
+
+                                                              </body>
+                                                              </html>
