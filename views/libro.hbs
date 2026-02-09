@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mensajes</title>
+    <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+
+    <h2>Mensajes guardados</h2>
+
+    <a href="/">volver</a>
+
+    <hr>
+
+    {{#each mensajes}}
+
+    <div class="card">
+      <b>{{this.usuario}}</b>
+        <p>{{this.mensaje}}</p>
+        </div>
+
+        {{else}}
+        <p>No hay mensajes todavia</p>
+        {{/each}}
+
+        </body>
+        </html>

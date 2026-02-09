@@ -1,5 +1,6 @@
 const express = require('express');
 const hbs = require('hbs');
+const fs = require('fs');
 
 const app = express();
 
@@ -51,10 +52,37 @@ hbs.registerHelper('priorityClass', function(p) {
                                                                                                                                                 }
                                                                                                                                                     ]
                                                                                                                                                       };
-
+app.use(express.urlencoded({ extended: true }));
                                                                                                                                                         res.render('dashboard', datos);
                                                                                                                                                         });
+app.get('/mensajes', (req, res) => {
 
+  const texto = fs.readFileSync('mensajes.json', 'utf-8');
+    const lista = JSON.parse(texto);
+
+      res.render('libro', { mensajes: lista });
+
+      });
+ 
+app.post('/nuevo-mensaje', (req, res) => {
+
+  const nuevo = {
+      usuario: req.body.usuario,
+          mensaje: req.body.mensaje
+            };
+
+              const texto = fs.readFileSync('mensajes.json', 'utf-8');
+                const lista = JSON.parse(texto);
+
+                  lista.push(nuevo);
+
+                    fs.writeFileSync('mensajes.json', JSON.stringify(lista, null, 2));
+
+                      res.redirect('/mensajes');
+
+                      });
                                                                                                                                                         app.listen(3000, () => {
-                                                                                                                                                          console.log('servidor listo en puerto 3000');
+                                                                                                                                                                                                                                                                                                                  console.log('servidor listo en puerto 3000');                                                                                                                                                          console.log('servidor listo en puerto 3000');
+                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            console.log('servidor listo en puerto 3000');
                                                                                                                                                           });
